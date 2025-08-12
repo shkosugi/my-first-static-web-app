@@ -16,8 +16,17 @@
 
     <script>
     (async function() {
-        const { text } = await( await fetch(`/api/message`)).json();
+
+        const str = 'TESTPOST';
+
+        const { text } = await(  await fetch("/api/message", { // SWA からロジックアプリへプロキシする場合の仮想パス
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({ "text": str }) 
+        })).json();
+
         document.querySelector('#name').textContent = text;
+
     }());
     </script>
 </body>
